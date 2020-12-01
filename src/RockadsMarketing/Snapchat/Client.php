@@ -2,7 +2,10 @@
 
 namespace Rockads\Connect\Snapchat;
 
+use Rockads\Connect\Exception\TokenExpireException;
+use Rockads\Connect\Snapchat\Entity\Campaigns;
 use Rockads\Connect\Snapchat\Entity\Credentials;
+use Rockads\Connect\Snapchat\Entity\Pagination;
 
 /**
  * Class Client
@@ -16,6 +19,9 @@ class Client extends HttpClient
      */
     private $credentials;
 
+    /**
+     * @var string
+     */
     private $apiEndpoint = 'https://adsapi.snapchat.com/';
 
     /**
@@ -63,6 +69,10 @@ class Client extends HttpClient
     }
 
 
+    /**
+     * @param $organizationId
+     * @throws \Rockads\Connect\Exception\ServiceException
+     */
     public function getAdAccounts($organizationId)
     {
         $data = $this->get("organizations/" . $organizationId . "/adaccounts");
@@ -70,19 +80,41 @@ class Client extends HttpClient
 
     }
 
-    public function getCampaigns($adAccountId, $parameters = [])
+    /**
+     * @param $adAccountId
+     * @param array $parameters
+     * @return Campaigns
+     */
+    public function getCampaigns($adAccountId, $parameters = []): Campaigns
     {
         try {
             $data = $this->get("adaccounts/" . $adAccountId . "/campaigns", $parameters);
-            return $data;
+
+            $pagination = new Pagination();
+            $pagination->load($data['paging']);
+
+            $campaigns = new Campaigns();
+            $campaigns->setCampaigns($data);
+            $campaigns->setPagination($pagination);
+
+            return $campaigns;
+
         } catch (\Rockads\Connect\Exception\AuthorizationException $e) {
-            $this->refreshToken();
+            throw new TokenExpireException();
         } catch (\Exception $e) {
 
+            $campaigns = new Campaigns();
+            $pagination = new Pagination();
+            $campaigns->setPagination($pagination);
+
+            return $campaigns;
         }
 
     }
 
+    /**
+     * @throws \Rockads\Connect\Exception\ServiceException
+     */
     public function refreshToken()
     {
 
@@ -96,8 +128,7 @@ class Client extends HttpClient
         ];
 
         $data = $this->post('login/oauth2/access_token', $parameters, null);
-        print_r($data);
-        die();
+        $this->credentials->setAccessToken($data['accessToken']);
 
     }
 }
