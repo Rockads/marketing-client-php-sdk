@@ -1,6 +1,6 @@
 <?php
 
-namespace Rockads\Connect\Snapchat;
+namespace Rockads\Connect\Tiktok;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
@@ -19,7 +19,7 @@ abstract class HttpClient
      * @param $service
      * @return string
      */
-    public function getEndpoint($service, $version = null)
+    public function getEndpoint($service, $version = 'v1.1')
     {
 
         $version = $version != null ? ($version . '/') : '';
@@ -33,7 +33,7 @@ abstract class HttpClient
      * @return mixed
      * @throws ServiceException
      */
-    public function post($service, $parameters, $version = 'v1')
+    public function post($service, $parameters, $version = 'v1.1')
     {
         try {
             $client = new Client();

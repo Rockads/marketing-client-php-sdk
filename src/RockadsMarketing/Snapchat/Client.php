@@ -2,7 +2,12 @@
 
 namespace Rockads\Connect\Snapchat;
 
+use Rockads\Connect\Exception\ServiceException;
 use Rockads\Connect\Exception\TokenExpireException;
+use Rockads\Connect\Snapchat\Entity\Ads;
+use Rockads\Connect\Snapchat\Entity\AdsetEntity;
+use Rockads\Connect\Snapchat\Entity\Adsets;
+use Rockads\Connect\Snapchat\Entity\CampaignEntity;
 use Rockads\Connect\Snapchat\Entity\Campaigns;
 use Rockads\Connect\Snapchat\Entity\Credentials;
 use Rockads\Connect\Snapchat\Entity\Pagination;
@@ -88,8 +93,8 @@ class Client extends HttpClient
     public function getCampaigns($adAccountId, $parameters = []): Campaigns
     {
         try {
-            $data = $this->get("adaccounts/" . $adAccountId . "/campaigns", $parameters);
 
+            $data = $this->get("adaccounts/" . $adAccountId . "/campaigns", $parameters);
             $pagination = new Pagination();
             $pagination->load($data['paging']);
 
@@ -102,12 +107,66 @@ class Client extends HttpClient
         } catch (\Rockads\Connect\Exception\AuthorizationException $e) {
             throw new TokenExpireException();
         } catch (\Exception $e) {
+            throw new ServiceException();
+        }
 
-            $campaigns = new Campaigns();
+    }
+
+    /**
+     * @param $adAccountId
+     * @param array $parameters
+     * @return Adsets
+     */
+    public function getAdsets(CampaignEntity $campaign, $parameters = []): Adsets
+    {
+        try {
+
+            $parameters['return_placement_v2'] = true;
+
+            $data = $this->get("campaigns/" . $campaign->getId() . "/adsquads", $parameters);
             $pagination = new Pagination();
-            $campaigns->setPagination($pagination);
+            $pagination->load($data['paging']);
 
-            return $campaigns;
+            $adsets = new Adsets();
+            $adsets->setAdsets($data);
+            $adsets->setPagination($pagination);
+
+            return $adsets;
+
+        } catch (\Rockads\Connect\Exception\AuthorizationException $e) {
+            throw new TokenExpireException();
+        } catch (\Exception $e) {
+            throw new ServiceException();
+        }
+
+    }
+
+
+    /**
+     * @param AdsetEntity $adset
+     * @param array $parameters
+     * @return Ads
+     * @throws ServiceException
+     * @throws TokenExpireException
+     */
+    public function getAds(AdsetEntity $adset, $parameters = []): Ads
+    {
+        try {
+
+            $data = $this->get("adsquads/" . $adset->getId() . "/ads", $parameters);
+            $pagination = new Pagination();
+            $pagination->load($data['paging']);
+
+            $ads = new Ads();
+            $ads->setAds($data);
+            $ads->setPagination($pagination);
+
+            return $ads;
+
+        } catch (\Rockads\Connect\Exception\AuthorizationException $e) {
+            throw new TokenExpireException();
+        } catch (\Exception $e) {
+            throw new ServiceException();
         }
 
     }
@@ -128,7 +187,14 @@ class Client extends HttpClient
         ];
 
         $data = $this->post('login/oauth2/access_token', $parameters, null);
-        $this->credentials->setAccessToken($data['accessToken']);
+
+        $credentials = new Credentials();
+        $credentials->setClientId($this->credentials->getClientId())
+            ->setClientSecret($this->credentials->getClientSecret())
+            ->setAccessToken($data['access_token'])
+            ->setRefreshToken($data['refresh_token']);
+
+        return $credentials;
 
     }
 }
