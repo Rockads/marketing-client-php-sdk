@@ -76,9 +76,17 @@ abstract class HttpClient
         } catch (RequestException $exception) {
 
             if ($exception->getResponse()->getStatusCode() == 401) {
-                throw new AuthorizationException();
+                throw new AuthorizationException($exception->getMessage());
             } else {
-                throw new ServiceException();
+                print_r($exception->getResponse()->getBody()->getContents());
+                throw new ServiceException($exception->getMessage());
+            }
+        }catch (\Exception $exception) {
+
+            if ($exception->getResponse()->getStatusCode() == 401) {
+                throw new AuthorizationException($exception->getMessage());
+            } else {
+                throw new ServiceException($exception->getMessage());
             }
         }
     }

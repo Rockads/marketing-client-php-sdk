@@ -11,6 +11,7 @@ use Rockads\Connect\Snapchat\Entity\CampaignEntity;
 use Rockads\Connect\Snapchat\Entity\Campaigns;
 use Rockads\Connect\Snapchat\Entity\Credentials;
 use Rockads\Connect\Snapchat\Entity\Pagination;
+use Rockads\Connect\Snapchat\Entity\Report;
 
 /**
  * Class Client
@@ -169,6 +170,21 @@ class Client extends HttpClient
             throw new ServiceException();
         }
 
+    }
+
+    public function getReport($adId, $parameters = [])
+    {
+        try {
+
+            $data = $this->get("ads/" . $adId . "/stats", $parameters);
+            $report = new Report();
+            $report->setReports($data);
+            return $report;
+        } catch (\Rockads\Connect\Exception\AuthorizationException $e) {
+            throw new TokenExpireException();
+        } catch (\Exception $e) {
+            throw new ServiceException();
+        }
     }
 
     /**
