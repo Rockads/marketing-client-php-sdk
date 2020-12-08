@@ -23,6 +23,11 @@ class Credentials
     private $authCode;
 
     /**
+     * @var string
+     */
+    private $accessToken;
+
+    /**
      * @return string
      */
     public function getAppId()
@@ -34,7 +39,7 @@ class Credentials
      * @param string $appId
      * @return Credentials
      */
-    public function setAppId($appId): Credentials
+    public function setAppId( $appId): Credentials
     {
         $this->appId = $appId;
         return $this;
@@ -52,7 +57,7 @@ class Credentials
      * @param string $secret
      * @return Credentials
      */
-    public function setSecret($secret): Credentials
+    public function setSecret( $secret): Credentials
     {
         $this->secret = $secret;
         return $this;
@@ -70,11 +75,30 @@ class Credentials
      * @param string $authCode
      * @return Credentials
      */
-    public function setAuthCode($authCode): Credentials
+    public function setAuthCode( $authCode): Credentials
     {
         $this->authCode = $authCode;
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getAccessToken()
+    {
+        return $this->accessToken;
+    }
+
+    /**
+     * @param string $accessToken
+     * @return Credentials
+     */
+    public function setAccessToken( $accessToken): Credentials
+    {
+        $this->accessToken = $accessToken;
+        return $this;
+    }
+
+    
 
 }

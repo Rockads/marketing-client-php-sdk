@@ -1,4 +1,5 @@
-/examples
+/examples/snapchat/config.php
+/examples/tiktok/config.php
 /vendor
 /composer.lock
 /.idea

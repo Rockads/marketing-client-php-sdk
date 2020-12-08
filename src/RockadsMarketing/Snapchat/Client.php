@@ -9,6 +9,7 @@ use Rockads\Connect\Snapchat\Entity\AdsetEntity;
 use Rockads\Connect\Snapchat\Entity\Adsets;
 use Rockads\Connect\Snapchat\Entity\CampaignEntity;
 use Rockads\Connect\Snapchat\Entity\Campaigns;
+use Rockads\Connect\Snapchat\Entity\Creative;
 use Rockads\Connect\Snapchat\Entity\Credentials;
 use Rockads\Connect\Snapchat\Entity\Pagination;
 use Rockads\Connect\Snapchat\Entity\Report;
@@ -172,7 +173,15 @@ class Client extends HttpClient
 
     }
 
-    public function getReport($adId, $parameters = [])
+
+    /**
+     * @param $adId
+     * @param array $parameters
+     * @return Report|null
+     * @throws ServiceException
+     * @throws TokenExpireException
+     */
+    public function getReport($adId, $parameters = []): ?Report
     {
         try {
 
@@ -180,6 +189,28 @@ class Client extends HttpClient
             $report = new Report();
             $report->setReports($data);
             return $report;
+        } catch (\Rockads\Connect\Exception\AuthorizationException $e) {
+            throw new TokenExpireException();
+        } catch (\Exception $e) {
+            throw new ServiceException();
+        }
+    }
+
+    /**
+     * @param $creativeId
+     * @param array $parameters
+     * @return Creative
+     * @throws ServiceException
+     * @throws TokenExpireException
+     */
+    public function getCreative($creativeId, $parameters = []): ?Creative
+    {
+        try {
+
+            $data = $this->get("creatives/" . $creativeId, $parameters);
+            $creative = new Creative();
+            $creative->load($data['creatives'][0]['creative']);
+            return $creative;
         } catch (\Rockads\Connect\Exception\AuthorizationException $e) {
             throw new TokenExpireException();
         } catch (\Exception $e) {

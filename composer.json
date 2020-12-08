@@ -16,5 +16,8 @@
     "psr-4": {
       "Rockads\\Connect\\": "src/RockadsMarketing/"
     }
+  },
+  "require-dev": {
+    "nunomaduro/phpinsights": "^1.14"
   }
 }
