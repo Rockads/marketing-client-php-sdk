@@ -69,7 +69,7 @@ class AdsetEntity
     private $autoBid;
 
     /**
-     * @var integer
+     * @var int
      */
     private $targetBid;
 

@@ -22,15 +22,20 @@ while (true) {
 
     $parameters = [
         'page' => $page,
-        'page_size' => 50,
+        'page_size' => 100,
+        'campaign_ids' => json_encode([1683788223585313, 1683789501076530, 1683789805956097]),
+        'dimensions' => json_encode(["ID","DAY", 'COUNTRY']),
+        'start_date' => '2020-01-12',
+        'end_date' => '2020-12-12',
+        'fields' => json_encode(['time_attr_convert_cnt','stat_cost','show_cnt','ctr','convert_cnt','conversion_rate','conversion_cost','click_cnt']),
     ];
 
     try {
-        $data = $client->getAdGroups('6894520063831834626', $parameters);
+        $data = $client->getReport('6894520063831834626', $parameters);
 
-        if ($data->getAdGroups() != null) {
-            foreach ($data->getAdGroups() as $group) {
-                print_r($group);
+        if ($data->getAds() != null) {
+            foreach ($data->getAds() as $ad) {
+                print_r($ad);
             }
         }
 
@@ -42,9 +47,9 @@ while (true) {
         }
 
     } catch (\Rockads\Connect\Exception\ServiceException $exception) {
-        die($exception->getMessage().'dad');
+        die($exception->getMessage() . 'dad');
     } catch (\Exception $exception) {
-        die($exception->getMessage().'d');
+        die($exception->getMessage() . 'd');
     }
 }
 

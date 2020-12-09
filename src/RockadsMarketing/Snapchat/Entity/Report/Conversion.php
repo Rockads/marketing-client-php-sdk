@@ -10,125 +10,125 @@ namespace Rockads\Connect\Snapchat\Entity\Report;
 class Conversion
 {
     /**
-     * @var integer
+     * @var int
      */
     private $purchases;
     /**
-     * @var integer
+     * @var int
      */
     private $purchasesValue;
     /**
-     * @var integer
+     * @var int
      */
     private $save;
     /**
-     * @var integer
+     * @var int
      */
     private $startCheckout;
     /**
-     * @var integer
+     * @var int
      */
     private $addCart;
     /**
-     * @var integer
+     * @var int
      */
     private $viewContent;
     /**
-     * @var integer
+     * @var int
      */
     private $addBilling;
     /**
-     * @var integer
+     * @var int
      */
     private $signUps;
     /**
-     * @var integer
+     * @var int
      */
     private $searches;
     /**
-     * @var integer
+     * @var int
      */
     private $levelCompletes;
     /**
-     * @var integer
+     * @var int
      */
     private $appOpens;
     /**
-     * @var integer
+     * @var int
      */
     private $pageViews;
     /**
-     * @var integer
+     * @var int
      */
     private $subscribe;
     /**
-     * @var integer
+     * @var int
      */
     private $adClick;
     /**
-     * @var integer
+     * @var int
      */
     private $adView;
 
     /**
-     * @var integer
+     * @var int
      */
     private $completeTutorial;
 
     /**
-     * @var integer
+     * @var int
      */
     private $invite;
 
     /**
-     * @var integer
+     * @var int
      */
     private $login;
 
     /**
-     * @var integer
+     * @var int
      */
     private $share;
 
     /**
-     * @var integer
+     * @var int
      */
     private $reserve;
 
     /**
-     * @var integer
+     * @var int
      */
     private $achievementUnlocked;
 
 
     /**
-     * @var integer
+     * @var int
      */
     private $spendCredits;
 
 
     /**
-     * @var integer
+     * @var int
      */
     private $rate;
 
     /**
-     * @var integer
+     * @var int
      */
     private $startTrial;
 
     /**
-     * @var integer
+     * @var int
      */
     private $listView;
 
     /**
-     * @var integer
+     * @var int
      */
     private $addToWishlist;
 
     /**
-     * @var integer
+     * @var int
      */
     private $addToCard;
 

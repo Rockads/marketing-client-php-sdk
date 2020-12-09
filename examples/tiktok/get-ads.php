@@ -22,15 +22,15 @@ while (true) {
 
     $parameters = [
         'page' => $page,
-        'page_size' => 50,
+        'page_size' => 100,
     ];
 
     try {
-        $data = $client->getAdGroups('6894520063831834626', $parameters);
+        $data = $client->getAds('6894520063831834626', $parameters);
 
-        if ($data->getAdGroups() != null) {
-            foreach ($data->getAdGroups() as $group) {
-                print_r($group);
+        if ($data->getAds() != null) {
+            foreach ($data->getAds() as $ad) {
+                print_r($ad);
             }
         }
 
@@ -42,9 +42,9 @@ while (true) {
         }
 
     } catch (\Rockads\Connect\Exception\ServiceException $exception) {
-        die($exception->getMessage().'dad');
+        die($exception->getMessage() . 'dad');
     } catch (\Exception $exception) {
-        die($exception->getMessage().'d');
+        die($exception->getMessage() . 'd');
     }
 }
 

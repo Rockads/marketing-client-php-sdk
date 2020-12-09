@@ -10,32 +10,32 @@ class Pagination
 {
 
     /**
-     * @var integer
+     * @var int
      */
     private $totalItems;
 
     /**
-     * @var integer
+     * @var int
      */
     private $totalPages;
 
     /**
-     * @var integer
+     * @var int
      */
     private $currentPage;
 
     /**
-     * @var integer
+     * @var int
      */
     private $nextPage;
 
     /**
-     * @var integer
+     * @var int
      */
     private $prevPage;
 
     /**
-     * @var integer
+     * @var int
      */
     private $limit;
 

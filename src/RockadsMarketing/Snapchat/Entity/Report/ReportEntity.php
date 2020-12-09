@@ -10,16 +10,16 @@ namespace Rockads\Connect\Snapchat\Entity\Report;
 class ReportEntity
 {
     /**
-     * @var integer
+     * @var int
      */
     private $impressions;
 
     /**
-     * @var integer
+     * @var int
      */
     private $swipes;
     /**
-     * @var integer
+     * @var int
      */
     private $spend;
     /**
@@ -27,15 +27,15 @@ class ReportEntity
      */
     private $country;
     /**
-     * @var integer
+     * @var int
      */
     private $iosInstalls;
     /**
-     * @var integer
+     * @var int
      */
     private $androidInstalls;
     /**
-     * @var integer
+     * @var int
      */
     private $totalInstalls;
 

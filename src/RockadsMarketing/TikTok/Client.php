@@ -4,6 +4,8 @@ namespace Rockads\Connect\Tiktok;
 
 use Rockads\Connect\Exception\ServiceException;
 use Rockads\Connect\Exception\TokenExpireException;
+use Rockads\Connect\TikTok\Entity\AdGroups;
+use Rockads\Connect\TikTok\Entity\Ads;
 use Rockads\Connect\TikTok\Entity\Campaigns;
 use Rockads\Connect\TikTok\Entity\Credentials;
 
@@ -95,25 +97,65 @@ class Client extends HttpClient
 
     }
 
+
     /**
      * @param $advertiserId
      * @param array $parameters
-     * @return Campaigns
+     * @return AdGroups
      * @throws ServiceException
      * @throws TokenExpireException
      */
-    public function getAdGroups($advertiserId, $parameters = []): Campaigns
+    public function getAdGroups($advertiserId, $parameters = []): AdGroups
     {
         try {
             $parameters['advertiser_id'] = $advertiserId;
             $data = $this->get('adgroup/get', $parameters, '2');
 
-            print_r($data);
-            die('d');
-            $campaigns = new Campaigns();
-            $campaigns->load($data);
+            $adGroups = new AdGroups();
+            $adGroups->load($data);
 
-            return $campaigns;
+            return $adGroups;
+
+        } catch (\Rockads\Connect\Exception\AuthorizationException $e) {
+            throw new TokenExpireException();
+        } catch (\Exception $e) {
+            throw new ServiceException($e->getMessage());
+        }
+
+    }
+
+
+    public function getAds($advertiserId, $parameters = []): Ads
+    {
+        try {
+            $parameters['advertiser_id'] = $advertiserId;
+            $data = $this->get('ad/get', $parameters);
+            $ads = new Ads();
+            $ads->load($data);
+
+            return $ads;
+
+        } catch (\Rockads\Connect\Exception\AuthorizationException $e) {
+            throw new TokenExpireException();
+        } catch (\Exception $e) {
+            throw new ServiceException($e->getMessage());
+        }
+
+    }
+
+    public function getReport($advertiserId, $parameters = []): Ads
+    {
+        try {
+            $parameters['advertiser_id'] = $advertiserId;
+            $data = $this->get('audience/campaign/get', $parameters);
+
+            print_r($data);
+            die('');
+
+            $ads = new Ads();
+            $ads->load($data);
+
+            return $ads;
 
         } catch (\Rockads\Connect\Exception\AuthorizationException $e) {
             throw new TokenExpireException();
