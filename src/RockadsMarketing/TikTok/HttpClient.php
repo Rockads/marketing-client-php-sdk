@@ -49,7 +49,7 @@ abstract class HttpClient
             if ($exception->getResponse()->getStatusCode() == 401) {
                 throw new AuthorizationException();
             } else {
-                throw new ServiceException();
+                throw new ServiceException($exception->getResponse()->getBody()->getContents());
             }
         }
     }

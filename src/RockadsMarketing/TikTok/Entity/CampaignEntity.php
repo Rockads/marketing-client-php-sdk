@@ -52,6 +52,11 @@ class CampaignEntity
     private $optStatus;
 
     /**
+     * @var array
+     */
+    private $raw;
+
+    /**
      * @return string
      */
     public function getId()
@@ -249,8 +254,28 @@ class CampaignEntity
         return $this;
     }
 
+    /**
+     * @return array
+     */
+    public function getRaw()
+    {
+        return $this->raw;
+    }
+
+    /**
+     * @param array $raw
+     * @return CampaignEntity
+     */
+    public function setRaw($raw): CampaignEntity
+    {
+        $this->raw = $raw;
+        return $this;
+    }
+
+
     public function load($campaign)
     {
+        $this->raw = $campaign;
         $this->budgetMode = $campaign['budget_mode'] ?? null;
         $this->status = $campaign['status'] ?? null;
         $this->objectiveType = $campaign['objective_type'] ?? null;

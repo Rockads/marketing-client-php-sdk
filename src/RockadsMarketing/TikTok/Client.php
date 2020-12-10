@@ -8,6 +8,7 @@ use Rockads\Connect\TikTok\Entity\AdGroups;
 use Rockads\Connect\TikTok\Entity\Ads;
 use Rockads\Connect\TikTok\Entity\Campaigns;
 use Rockads\Connect\TikTok\Entity\Credentials;
+use Rockads\Connect\TikTok\Entity\Report;
 
 /**
  * Class Client
@@ -125,6 +126,13 @@ class Client extends HttpClient
     }
 
 
+    /**
+     * @param $advertiserId
+     * @param array $parameters
+     * @return Ads
+     * @throws ServiceException
+     * @throws TokenExpireException
+     */
     public function getAds($advertiserId, $parameters = []): Ads
     {
         try {
@@ -143,19 +151,24 @@ class Client extends HttpClient
 
     }
 
-    public function getReport($advertiserId, $parameters = []): Ads
+    /**
+     * @param $advertiserId
+     * @param array $parameters
+     * @param string $reportType
+     * @return Report
+     * @throws ServiceException
+     * @throws TokenExpireException
+     */
+    public function getReport($advertiserId, $parameters = [], $reportType = 'ad'): Report
     {
         try {
             $parameters['advertiser_id'] = $advertiserId;
-            $data = $this->get('audience/campaign/get', $parameters);
+            $data = $this->get('audience/' . $reportType . '/get', $parameters);
 
-            print_r($data);
-            die('');
+            $report = new Report();
+            $report->load($data);
 
-            $ads = new Ads();
-            $ads->load($data);
-
-            return $ads;
+            return $report;
 
         } catch (\Rockads\Connect\Exception\AuthorizationException $e) {
             throw new TokenExpireException();

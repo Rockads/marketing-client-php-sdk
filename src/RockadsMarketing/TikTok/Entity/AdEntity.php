@@ -155,6 +155,10 @@ class AdEntity
      * @var \DateTime
      */
     private $modifyTime;
+    /**
+     * @var array
+     */
+    private $raw;
 
     /**
      * @return string
@@ -714,12 +718,31 @@ class AdEntity
         return $this;
     }
 
+    /**
+     * @return array
+     */
+    public function getRaw()
+    {
+        return $this->raw;
+    }
+
+    /**
+     * @param array $raw
+     * @return AdEntity
+     */
+    public function setRaw(array $raw): AdEntity
+    {
+        $this->raw = $raw;
+        return $this;
+    }
+
 
     /**
      * @param array $data
      */
     public function load(array $data)
     {
+        $this->raw = $data;
         $this->openUrl = $data['open_url'] ?? null;
         $this->appName = $data['app_name'] ?? null;
         $this->vastMoat = $data['vast_moat'] ?? null;

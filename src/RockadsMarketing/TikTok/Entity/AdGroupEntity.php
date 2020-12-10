@@ -226,6 +226,11 @@ class AdGroupEntity
     private $budgetMode;
 
     /**
+     * @var array
+     */
+    private $raw;
+
+    /**
      * @return int
      */
     public function getId()
@@ -1053,12 +1058,31 @@ class AdGroupEntity
         return $this;
     }
 
+    /**
+     * @return array
+     */
+    public function getRaw()
+    {
+        return $this->raw;
+    }
+
+    /**
+     * @param array $raw
+     * @return AdGroupEntity
+     */
+    public function setRaw($raw): AdGroupEntity
+    {
+        $this->raw = $raw;
+        return $this;
+    }
+
 
     /**
      * @param array $data
      */
     public function load(array $data)
     {
+        $this->raw = $data;
         $this->name = $data['adgroup_name'] ?? null;
         $this->videoDownload = $data['video_download'] ?? null;
         $this->openUrl = $data['open_url'] ?? null;
