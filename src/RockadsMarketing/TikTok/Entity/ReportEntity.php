@@ -287,8 +287,8 @@ class ReportEntity
     {
 
         $this->raw = $data;
-        $this->adId = $data['dimensions']['adId'] ?? 0;
-        $this->country = $data['country_id']['adId'] ?? null;
+        $this->adId = $data['dimensions']['ad_id'] ?? 0;
+        $this->country = $data['dimensions']['country_id']?? null;
         $this->day = isset($data['dimensions']['stat_datetime']) ? new \DateTime($data['dimensions']['stat_datetime']) : null;
         $this->ctr = $data['metrics']['ctr'] ?? 0.0;
         $this->conversionCost = $data['metrics']['conversion_cost'] ?? 0.0;
