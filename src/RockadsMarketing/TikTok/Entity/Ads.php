@@ -50,7 +50,7 @@ class Ads
     public function load(?array $ads)
     {
 
-        if ($ads['code'] == 0) {
+        if ($ads['code'] == 0 && isset($report['data']['list']) && !empty($report['data']['list'])) {
             $pagination = new Pagination();
             $pagination->load($ads['data']['page_info']);
 

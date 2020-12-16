@@ -50,7 +50,7 @@ class Report
     public function load(?array $report)
     {
 
-        if ($report['code'] == 0) {
+        if ($report['code'] == 0 && isset($report['data']['list']) && !empty($report['data']['list'])) {
             $pagination = new Pagination();
             $pagination->load($report['data']['page_info']);
 
