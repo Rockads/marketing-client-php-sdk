@@ -111,10 +111,22 @@ class AdsetEntity
     private $creationState;
 
     /**
-     * @var
+     * @var string
      *
      */
     private $deliveryStatus;
+
+    /**
+     * @var string
+     *
+     */
+    private $accountId;
+
+    /**
+     * @var ?array
+     *
+     */
+    private $raw;
 
     /**
      * @return string
@@ -468,6 +480,42 @@ class AdsetEntity
         $this->deliveryStatus = $deliveryStatus;
     }
 
+    /**
+     * @return string
+     */
+    public function getAccountId()
+    {
+        return $this->accountId;
+    }
+
+    /**
+     * @param string $accountId
+     * @return AdsetEntity
+     */
+    public function setAccountId($accountId): AdsetEntity
+    {
+        $this->accountId = $accountId;
+        return $this;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getRaw()
+    {
+        return $this->raw;
+    }
+
+    /**
+     * @param array|null $raw
+     * @return AdsetEntity
+     */
+    public function setRaw( $raw): AdsetEntity
+    {
+        $this->raw = $raw;
+        return $this;
+    }
+
 
     public function load($data)
     {
@@ -493,6 +541,7 @@ class AdsetEntity
         $this->pacingType = $data['pacing_type'];
         $this->creationState = $data['creation_state'];
         $this->deliveryStatus = $data['delivery_status'];
+        $this->raw = $data;
 
         return $this;
     }

@@ -55,6 +55,11 @@ class AdEntity
     private $reviewStatus;
 
     /**
+     * @var string
+     */
+    private $accountId;
+
+    /**
      * @var ?array
      */
     private $reviewStatusReasons;
@@ -62,6 +67,11 @@ class AdEntity
      * @var ?array
      */
     private $deliveryStatus;
+
+    /**
+     * @var ?array
+     */
+    private $raw;
 
     /**
      * @return string
@@ -255,6 +265,43 @@ class AdEntity
         $this->deliveryStatus = $deliveryStatus;
     }
 
+    /**
+     * @return string
+     */
+    public function getAccountId()
+    {
+        return $this->accountId;
+    }
+
+    /**
+     * @param string $accountId
+     * @return AdEntity
+     */
+    public function setAccountId($accountId)
+    {
+        $this->accountId = $accountId;
+        return $this;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getRaw()
+    {
+        return $this->raw;
+    }
+
+    /**
+     * @param array|null $raw
+     * @return AdEntity
+     */
+    public function setRaw($raw): AdEntity
+    {
+        $this->raw = $raw;
+        return $this;
+    }
+
+
     public function load($data)
     {
         $this->id = $data['id'];
@@ -270,6 +317,7 @@ class AdEntity
         $this->reviewStatus = $data['review_status'];
         $this->reviewStatusReasons = $data['review_status_reasons'];
         $this->deliveryStatus = $data['delivery_status'];
+        $this->raw = $data;
 
         return $this;
     }

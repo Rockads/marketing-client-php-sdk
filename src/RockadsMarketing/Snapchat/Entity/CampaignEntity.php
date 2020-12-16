@@ -61,6 +61,12 @@ class CampaignEntity
     private $deliveryStatus;
 
     /**
+     * @var ?array
+     *
+     */
+    private $raw;
+
+    /**
      * @return string
      */
     public function getId()
@@ -236,6 +242,25 @@ class CampaignEntity
         $this->deliveryStatus = $deliveryStatus;
     }
 
+    /**
+     * @return array|null
+     */
+    public function getRaw()
+    {
+        return $this->raw;
+    }
+
+    /**
+     * @param array|null $raw
+     * @return CampaignEntity
+     */
+    public function setRaw($raw): CampaignEntity
+    {
+        $this->raw = $raw;
+        return $this;
+    }
+
+
     public function load($data)
     {
         $this->id = $data['id'];
@@ -249,6 +274,7 @@ class CampaignEntity
         $this->measurementSpec = $data['measurement_spec'];
         $this->buyModel = $data['buy_model'];
         $this->deliveryStatus = $data['delivery_status'];
+        $this->raw = $data;
 
         return $this;
     }
