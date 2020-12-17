@@ -186,8 +186,9 @@ class Client extends HttpClient
         try {
 
             $data = $this->get("ads/" . $adId . "/stats", $parameters);
+
             $report = new Report();
-            $report->setReports($data);
+            $report->setReports($data, $adId);
             return $report;
         } catch (\Rockads\Connect\Exception\AuthorizationException $e) {
             throw new TokenExpireException();

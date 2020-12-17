@@ -64,8 +64,9 @@ while (true) {
     $parameters = [
         'limit' => 10,
         'cursor' => $cursor,
-        'granularity' => 'TOTAL',
-        'breakdown' => 'DAY',
+        'granularity' => 'DAY',
+        'start_time' => '2020-12-11T21:00:00.000Z',
+        'end_time' => '2020-12-17T21:00:00.000Z',
         'report_dimension' => 'country',
         'swipe_up_attribution_window' => '28_DAY',
         'view_attribution_window' => '28_DAY',

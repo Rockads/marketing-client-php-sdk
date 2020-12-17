@@ -41,24 +41,30 @@ class Report
     /**
      * @return ReportEntity[]
      */
-    public function getreports(): ?array
+    public function getReports(): ?array
     {
         return $this->reports;
     }
 
+
     /**
-     * @param array $reports
+     * @param array|null $reports
+     * @param $adId
      */
-    public function setReports(?array $reports)
+    public function setReports(?array $reports, $adId)
     {
         $reportList = [];
 
-        if (isset($reports['total_stats'][0]['total_stat']['dimension_stats'])) {
-            foreach ($reports['total_stats'][0]['total_stat']['dimension_stats'] as $report) {
-                $entity = new ReportEntity();
-                $entity->load($report);
-                $reportList[] = $entity;
+        if (isset($reports['timeseries_stats'][0]['timeseries_stat']['timeseries'])) {
+            foreach ($reports['timeseries_stats'][0]['timeseries_stat']['timeseries'] as $reportSeries) {
+                foreach ($reportSeries['dimension_stats'] as $report) {
+                    $entity = new ReportEntity();
+                    $entity->load($report, $reportSeries['start_time'], $adId);
+                    $reportList[] = $entity;
+                }
+
             }
+
         }
 
         $this->reports = $reportList;

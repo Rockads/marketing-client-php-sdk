@@ -60,6 +60,11 @@ class AdEntity
     private $accountId;
 
     /**
+     * @var string
+     */
+    private $campaignId;
+
+    /**
      * @var ?array
      */
     private $reviewStatusReasons;
@@ -301,6 +306,24 @@ class AdEntity
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getCampaignId()
+    {
+        return $this->campaignId;
+    }
+
+    /**
+     * @param string $campaignId
+     * @return AdEntity
+     */
+    public function setCampaignId($campaignId): AdEntity
+    {
+        $this->campaignId = $campaignId;
+        return $this;
+    }
+
 
     public function load($data)
     {
@@ -315,6 +338,7 @@ class AdEntity
         $this->type = $data['type'];
         $this->renderType = $data['render_type'];
         $this->reviewStatus = $data['review_status'];
+        $this->campaignId = $data['campaignId'] ?? null;
         $this->reviewStatusReasons = $data['review_status_reasons'];
         $this->deliveryStatus = $data['delivery_status'];
         $this->raw = $data;

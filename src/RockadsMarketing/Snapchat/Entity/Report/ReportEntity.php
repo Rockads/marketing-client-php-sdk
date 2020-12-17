@@ -45,6 +45,31 @@ class ReportEntity
     private $conversion;
 
     /**
+     * @var \DateTime
+     */
+    private $day;
+
+    /**
+     * @var ?array
+     */
+    private $raw;
+
+    /**
+     * @var string
+     */
+    private $adId;
+
+    /**
+     * @var string
+     */
+
+    private $campaignId;
+    /**
+     * @var string
+     */
+    private $adAccountId;
+
+    /**
      * @return int
      */
     public function getImpressions(): int
@@ -188,16 +213,117 @@ class ReportEntity
         return $this;
     }
 
-    public function load($data)
+    /**
+     * @return array|null
+     */
+    public function getRaw()
+    {
+        return $this->raw;
+    }
+
+    /**
+     * @param array|null $raw
+     * @return ReportEntity
+     */
+    public function setRaw($raw): ReportEntity
+    {
+        $this->raw = $raw;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDay(): \DateTime
+    {
+        return $this->day;
+    }
+
+    /**
+     * @param \DateTime $day
+     * @return ReportEntity
+     */
+    public function setDay(\DateTime $day): ReportEntity
+    {
+        $this->day = $day;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAdId()
+    {
+        return $this->adId;
+    }
+
+    /**
+     * @param string $adId
+     * @return ReportEntity
+     */
+    public function setAdId($adId): ReportEntity
+    {
+        $this->adId = $adId;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCampaignId()
+    {
+        return $this->campaignId;
+    }
+
+    /**
+     * @param string $campaignId
+     * @return ReportEntity
+     */
+    public function setCampaignId($campaignId): ReportEntity
+    {
+        $this->campaignId = $campaignId;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAdAccountId()
+    {
+        return $this->adAccountId;
+    }
+
+    /**
+     * @param string $adAccountId
+     * @return ReportEntity
+     */
+    public function setAdAccountId($adAccountId): ReportEntity
+    {
+        $this->adAccountId = $adAccountId;
+        return $this;
+    }
+
+
+    /**
+     * @param $data
+     * @param $day
+     * @param $adId
+     * @return $this
+     * @throws \Exception
+     */
+    public function load($data, $day, $adId)
     {
         $this->impressions = isset($data['impressions']) ? $data['impressions'] : 0;
         $this->swipes = isset($data['swipes']) ? $data['swipes'] : 0;
-        $this->spend = isset($data['spend']) ? $data['spend'] : 0;
-        $this->country = isset($data['country']) ? $data['country'] : null;
+        $this->spend = isset($data['spend']) ? $data['spend'] / 100000 : 0;
+        $this->country = isset($data['country']) ? strtoupper($data['country']) : null;
         $this->iosInstalls = isset($data['ios_installs']) ? $data['ios_installs'] : 0;
         $this->androidInstalls = isset($data['android_installs']) ? $data['android_installs'] : 0;
         $this->totalInstalls = isset($data['total_installs']) ? $data['total_installs'] : 0;
         $this->conversion = (new Conversion())->load($data);
+        $this->day = (new \DateTime($day));
+        $this->raw = $data;
+        $this->adId = $adId;
 
         return $this;
 
