@@ -84,7 +84,7 @@ while (true) {
 
     try {
 
-        $data = $client->getReport('987254cf-c3f3-4933-8c94-946c10ec1354', $parameters);
+        $data = $client->getReport('f5688bf1-cd66-43fa-9bbc-302f8179d0dc', $parameters);
 
         if ($data->getreports() != null) {
             foreach ($data->getreports() as $report) {

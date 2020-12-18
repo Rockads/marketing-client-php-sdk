@@ -28,6 +28,8 @@ while (true) {
     try {
         $data = $client->getCampaigns('6894520063831834626', $parameters);
 
+        print_r($data);
+
         if ($data->getCampaigns() != null) {
             foreach ($data->getCampaigns() as $campaign) {
                 print_r($campaign);
@@ -35,7 +37,6 @@ while (true) {
         }
 
         if ($data->getPagination() != null && $data->getPagination()->getNextPage() != null) {
-            print_r($data->getPagination());
             $page = $data->getPagination()->getNextPage();
         } else {
             die('bitti Total Page : ' . $page);

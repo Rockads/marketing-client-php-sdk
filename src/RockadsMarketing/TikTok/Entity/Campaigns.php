@@ -52,7 +52,7 @@ class Campaigns
     public function load(?array $campaigns)
     {
 
-        if ($campaigns['code'] == 0 && isset($report['data']['list']) && !empty($report['data']['list'])) {
+        if ($campaigns['code'] == 0 && isset($campaigns['data']['list']) && !empty($campaigns['data']['list'])) {
             $pagination = new Pagination();
             $pagination->load($campaigns['data']['page_info']);
 

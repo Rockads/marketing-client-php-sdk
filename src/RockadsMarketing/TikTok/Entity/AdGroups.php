@@ -51,7 +51,7 @@ class AdGroups
     public function load(?array $adGroups)
     {
 
-        if ($adGroups['code'] == 0 && isset($report['data']['list']) && !empty($report['data']['list'])) {
+        if ($adGroups['code'] == 0 && isset($adGroups['data']['list']) && !empty($adGroups['data']['list'])) {
             $pagination = new Pagination();
             $pagination->load($adGroups['data']['page_info']);
 
