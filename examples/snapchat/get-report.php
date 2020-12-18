@@ -28,6 +28,14 @@ while (true) {
         'total_installs',
         'android_installs',
         'ios_installs',
+        'video_views',
+        'view_time_millis',
+        'screen_time_millis',
+        'quartile_1',
+        'quartile_2',
+        'quartile_3',
+        'view_completion',
+        'spend',
         'conversion_purchases',
         'conversion_purchases_value',
         'conversion_save',
@@ -65,7 +73,7 @@ while (true) {
         'limit' => 10,
         'cursor' => $cursor,
         'granularity' => 'DAY',
-        'start_time' => '2020-12-11T21:00:00.000Z',
+        'start_time' => '2020-11-17T21:00:00.000Z',
         'end_time' => '2020-12-17T21:00:00.000Z',
         'report_dimension' => 'country',
         'swipe_up_attribution_window' => '28_DAY',
@@ -73,9 +81,10 @@ while (true) {
         'fields' => implode(',', $fields),
     ];
 
+
     try {
 
-        $data = $client->getReport('59902316-f527-48ab-9b2b-95570b160070', $parameters);
+        $data = $client->getReport('987254cf-c3f3-4933-8c94-946c10ec1354', $parameters);
 
         if ($data->getreports() != null) {
             foreach ($data->getreports() as $report) {

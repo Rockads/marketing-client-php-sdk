@@ -21,6 +21,15 @@ class ReportEntity
     /**
      * @var int
      */
+    private $videoViews;
+    /**
+     * /**
+     * @var int
+     */
+    private $viewTimeMillis;
+    /**
+     * @var int
+     */
     private $spend;
     /**
      * @var string
@@ -68,11 +77,49 @@ class ReportEntity
      * @var string
      */
     private $adAccountId;
+    /**
+     * @var int
+     */
+    private $quartile1;
+    /**
+     * @var int
+     */
+    private $quartile2;
+    /**
+     * @var int
+     */
+    private $quartile3;
+
+
+    /**
+     * @var int
+     */
+    private $customEvent1;
+
+    /**
+     * @var int
+     */
+    private $customEvent2;
+
+    /**
+     * @var int
+     */
+    private $customEvent3;
+
+    /**
+     * @var int
+     */
+    private $customEvent4;
+
+    /**
+     * @var int
+     */
+    private $customEvent5;
 
     /**
      * @return int
      */
-    public function getImpressions(): int
+    public function getImpressions()
     {
         return $this->impressions;
     }
@@ -81,7 +128,7 @@ class ReportEntity
      * @param int $impressions
      * @return ReportEntity
      */
-    public function setImpressions(int $impressions): ReportEntity
+    public function setImpressions($impressions): ReportEntity
     {
         $this->impressions = $impressions;
         return $this;
@@ -90,7 +137,7 @@ class ReportEntity
     /**
      * @return int
      */
-    public function getSwipes(): int
+    public function getSwipes()
     {
         return $this->swipes;
     }
@@ -99,7 +146,7 @@ class ReportEntity
      * @param int $swipes
      * @return ReportEntity
      */
-    public function setSwipes(int $swipes): ReportEntity
+    public function setSwipes($swipes): ReportEntity
     {
         $this->swipes = $swipes;
         return $this;
@@ -108,7 +155,7 @@ class ReportEntity
     /**
      * @return int
      */
-    public function getSpend(): int
+    public function getSpend()
     {
         return $this->spend;
     }
@@ -117,7 +164,7 @@ class ReportEntity
      * @param int $spend
      * @return ReportEntity
      */
-    public function setSpend(int $spend): ReportEntity
+    public function setSpend($spend): ReportEntity
     {
         $this->spend = $spend;
         return $this;
@@ -144,7 +191,7 @@ class ReportEntity
     /**
      * @return int
      */
-    public function getIosInstalls(): int
+    public function getIosInstalls()
     {
         return $this->iosInstalls;
     }
@@ -153,7 +200,7 @@ class ReportEntity
      * @param int $iosInstalls
      * @return ReportEntity
      */
-    public function setIosInstalls(int $iosInstalls): ReportEntity
+    public function setIosInstalls($iosInstalls): ReportEntity
     {
         $this->iosInstalls = $iosInstalls;
         return $this;
@@ -162,7 +209,7 @@ class ReportEntity
     /**
      * @return int
      */
-    public function getAndroidInstalls(): int
+    public function getAndroidInstalls()
     {
         return $this->androidInstalls;
     }
@@ -171,7 +218,7 @@ class ReportEntity
      * @param int $androidInstalls
      * @return ReportEntity
      */
-    public function setAndroidInstalls(int $androidInstalls): ReportEntity
+    public function setAndroidInstalls($androidInstalls): ReportEntity
     {
         $this->androidInstalls = $androidInstalls;
         return $this;
@@ -180,7 +227,7 @@ class ReportEntity
     /**
      * @return int
      */
-    public function getTotalInstalls(): int
+    public function getTotalInstalls()
     {
         return $this->totalInstalls;
     }
@@ -189,7 +236,7 @@ class ReportEntity
      * @param int $totalInstalls
      * @return ReportEntity
      */
-    public function setTotalInstalls(int $totalInstalls): ReportEntity
+    public function setTotalInstalls($totalInstalls): ReportEntity
     {
         $this->totalInstalls = $totalInstalls;
         return $this;
@@ -303,6 +350,186 @@ class ReportEntity
         return $this;
     }
 
+    /**
+     * @return int
+     */
+    public function getVideoViews()
+    {
+        return $this->videoViews;
+    }
+
+    /**
+     * @param int $videoViews
+     * @return ReportEntity
+     */
+    public function setVideoViews($videoViews): ReportEntity
+    {
+        $this->videoViews = $videoViews;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getViewTimeMillis()
+    {
+        return $this->viewTimeMillis;
+    }
+
+    /**
+     * @param int $viewTimeMillis
+     * @return ReportEntity
+     */
+    public function setViewTimeMillis($viewTimeMillis): ReportEntity
+    {
+        $this->viewTimeMillis = $viewTimeMillis;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getQuartile1()
+    {
+        return $this->quartile1;
+    }
+
+    /**
+     * @param int $quartile1
+     * @return ReportEntity
+     */
+    public function setQuartile1($quartile1): ReportEntity
+    {
+        $this->quartile1 = $quartile1;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getQuartile2()
+    {
+        return $this->quartile2;
+    }
+
+    /**
+     * @param int $quartile2
+     * @return ReportEntity
+     */
+    public function setQuartile2($quartile2): ReportEntity
+    {
+        $this->quartile2 = $quartile2;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getQuartile3()
+    {
+        return $this->quartile3;
+    }
+
+    /**
+     * @param int $quartile3
+     * @return ReportEntity
+     */
+    public function setQuartile3($quartile3): ReportEntity
+    {
+        $this->quartile3 = $quartile3;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCustomEvent1()
+    {
+        return $this->customEvent1;
+    }
+
+    /**
+     * @param int $customEvent1
+     * @return ReportEntity
+     */
+    public function setCustomEvent1($customEvent1): ReportEntity
+    {
+        $this->customEvent1 = $customEvent1;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCustomEvent2()
+    {
+        return $this->customEvent2;
+    }
+
+    /**
+     * @param int $customEvent2
+     * @return ReportEntity
+     */
+    public function setCustomEvent2($customEvent2): ReportEntity
+    {
+        $this->customEvent2 = $customEvent2;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCustomEvent3()
+    {
+        return $this->customEvent3;
+    }
+
+    /**
+     * @param int $customEvent3
+     * @return ReportEntity
+     */
+    public function setCustomEvent3($customEvent3): ReportEntity
+    {
+        $this->customEvent3 = $customEvent3;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCustomEvent4()
+    {
+        return $this->customEvent4;
+    }
+
+    /**
+     * @param int $customEvent4
+     * @return ReportEntity
+     */
+    public function setCustomEvent4($customEvent4): ReportEntity
+    {
+        $this->customEvent4 = $customEvent4;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCustomEvent5()
+    {
+        return $this->customEvent5;
+    }
+
+    /**
+     * @param int $customEvent5
+     * @return ReportEntity
+     */
+    public function setCustomEvent5($customEvent5): ReportEntity
+    {
+        $this->customEvent5 = $customEvent5;
+        return $this;
+    }
+
 
     /**
      * @param $data
@@ -320,10 +547,20 @@ class ReportEntity
         $this->iosInstalls = isset($data['ios_installs']) ? $data['ios_installs'] : 0;
         $this->androidInstalls = isset($data['android_installs']) ? $data['android_installs'] : 0;
         $this->totalInstalls = isset($data['total_installs']) ? $data['total_installs'] : 0;
+        $this->videoViews = $data['videoViews'] ?? 0;
+        $this->quartile1 = $data['quartile_1'] ?? 0;
+        $this->quartile2 = $data['quartile_2'] ?? 0;
+        $this->quartile3 = $data['quartile_3'] ?? 0;
+        $this->viewTimeMillis = $data['view_time_millis'] ?? 0;
         $this->conversion = (new Conversion())->load($data);
         $this->day = (new \DateTime($day));
         $this->raw = $data;
         $this->adId = $adId;
+        $this->customEvent1 = $data['custom_event_1'] ?? 0;
+        $this->customEvent2 = $data['custom_event_2'] ?? 0;
+        $this->customEvent3 = $data['custom_event_3'] ?? 0;
+        $this->customEvent4 = $data['custom_event_4'] ?? 0;
+        $this->customEvent5 = $data['custom_event_5'] ?? 0;
 
         return $this;
 

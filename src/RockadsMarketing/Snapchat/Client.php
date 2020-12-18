@@ -186,7 +186,6 @@ class Client extends HttpClient
         try {
 
             $data = $this->get("ads/" . $adId . "/stats", $parameters);
-
             $report = new Report();
             $report->setReports($data, $adId);
             return $report;
