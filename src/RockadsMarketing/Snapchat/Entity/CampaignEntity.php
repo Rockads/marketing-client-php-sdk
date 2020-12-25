@@ -61,6 +61,19 @@ class CampaignEntity
     private $deliveryStatus;
 
     /**
+     * @var float
+     *
+     */
+    private $dailyBudget;
+
+
+    /**
+     * @var float
+     *
+     */
+    private $lifetimeBudget;
+
+    /**
      * @var ?array
      *
      */
@@ -260,6 +273,42 @@ class CampaignEntity
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getDailyBudget()
+    {
+        return $this->dailyBudget;
+    }
+
+    /**
+     * @param string $dailyBudget
+     * @return CampaignEntity
+     */
+    public function setDailyBudget($dailyBudget): CampaignEntity
+    {
+        $this->dailyBudget = $dailyBudget;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLifetimeBudget()
+    {
+        return $this->lifetimeBudget;
+    }
+
+    /**
+     * @param float $lifetimeBudget
+     * @return CampaignEntity
+     */
+    public function setLifetimeBudget($lifetimeBudget): CampaignEntity
+    {
+        $this->lifetimeBudget = $lifetimeBudget;
+        return $this;
+    }
+
 
     public function load($data)
     {
@@ -274,6 +323,8 @@ class CampaignEntity
         $this->measurementSpec = $data['measurement_spec'];
         $this->buyModel = $data['buy_model'];
         $this->deliveryStatus = $data['delivery_status'];
+        $this->dailyBudget = isset($data['daily_budget_micro']) ? $data['daily_budget_micro'] / 1000000 : 0.0;
+        $this->lifetimeBudget = isset($data['lifetime_spend_cap_micro']) ? $data['lifetime_spend_cap_micro'] / 1000000 : 0.0;
         $this->raw = $data;
 
         return $this;

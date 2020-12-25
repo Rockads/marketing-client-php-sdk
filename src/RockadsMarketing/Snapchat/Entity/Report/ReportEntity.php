@@ -542,7 +542,7 @@ class ReportEntity
     {
         $this->impressions = isset($data['impressions']) ? $data['impressions'] : 0;
         $this->swipes = isset($data['swipes']) ? $data['swipes'] : 0;
-        $this->spend = isset($data['spend']) ? $data['spend'] / 100000 : 0;
+        $this->spend = isset($data['spend']) ? $data['spend'] / 1000000 : 0;
         $this->country = isset($data['country']) ? strtoupper($data['country']) : null;
         $this->iosInstalls = isset($data['ios_installs']) ? $data['ios_installs'] : 0;
         $this->androidInstalls = isset($data['android_installs']) ? $data['android_installs'] : 0;
