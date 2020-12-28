@@ -52,6 +52,11 @@ class CampaignEntity
     private $optStatus;
 
     /**
+     * @var int
+     */
+    private $appId;
+
+    /**
      * @var array
      */
     private $raw;
@@ -272,6 +277,24 @@ class CampaignEntity
         return $this;
     }
 
+    /**
+     * @return int
+     */
+    public function getAppId()
+    {
+        return $this->appId;
+    }
+
+    /**
+     * @param int $appId
+     * @return CampaignEntity
+     */
+    public function setAppId($appId): CampaignEntity
+    {
+        $this->appId = $appId;
+        return $this;
+    }
+
 
     public function load($campaign)
     {
@@ -287,6 +310,7 @@ class CampaignEntity
         $this->modifyTime = isset($campaign['modify_time']) ? new \DateTime($campaign['modify_time']) : null;
         $this->objective = $campaign['objective'] ?? null;
         $this->optStatus = $campaign['opt_status'] ?? null;
+        $this->appId = 0;
 
         return $this;
 

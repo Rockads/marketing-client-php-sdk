@@ -156,6 +156,10 @@ class AdEntity
      */
     private $modifyTime;
     /**
+     * @var int
+     */
+    private $appId;
+    /**
      * @var array
      */
     private $raw;
@@ -736,6 +740,24 @@ class AdEntity
         return $this;
     }
 
+    /**
+     * @return int
+     */
+    public function getAppId()
+    {
+        return $this->appId;
+    }
+
+    /**
+     * @param int $appId
+     * @return AdEntity
+     */
+    public function setAppId($appId): AdEntity
+    {
+        $this->appId = $appId;
+        return $this;
+    }
+
 
     /**
      * @param array $data
@@ -774,6 +796,7 @@ class AdEntity
         $this->videoId = $data['video_id'] ?? null;
         $this->landingPageUrl = $data['landing_page_url'] ?? null;
         $this->modifyTime = new \DateTime($data['modify_time']);
+        $this->appId = 0;
     }
 
 

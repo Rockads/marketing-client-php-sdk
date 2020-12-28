@@ -226,6 +226,11 @@ class AdGroupEntity
     private $budgetMode;
 
     /**
+     * @var int
+     */
+    private $applicationId;
+
+    /**
      * @var array
      */
     private $raw;
@@ -1059,6 +1064,25 @@ class AdGroupEntity
     }
 
     /**
+     * @return int
+     */
+    public function getApplicationId()
+    {
+        return $this->applicationId;
+    }
+
+    /**
+     * @param int $applicationId
+     * @return AdGroupEntity
+     */
+    public function setApplicationId(int $applicationId): AdGroupEntity
+    {
+        $this->applicationId = $applicationId;
+        return $this;
+    }
+
+
+    /**
      * @return array
      */
     public function getRaw()
@@ -1128,6 +1152,7 @@ class AdGroupEntity
         $this->budget = $data['budget'] ?? 0.0;
         $this->budgetMode = $data['budget_mode'] ?? null;
         $this->actionCategories = $data['action_categories'] ?? [];
+        $this->applicationId = 0;
     }
 
 
