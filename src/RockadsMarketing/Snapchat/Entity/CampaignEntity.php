@@ -73,6 +73,13 @@ class CampaignEntity
      */
     private $lifetimeBudget;
 
+
+    /**
+     * @var int
+     *
+     */
+    private $appId;
+
     /**
      * @var ?array
      *
@@ -309,6 +316,24 @@ class CampaignEntity
         return $this;
     }
 
+    /**
+     * @return int
+     */
+    public function getAppId(): int
+    {
+        return $this->app_id;
+    }
+
+    /**
+     * @param int $appId
+     * @return CampaignEntity
+     */
+    public function setAppId(int $appId): CampaignEntity
+    {
+        $this->app_id = $appId;
+        return $this;
+    }
+
 
     public function load($data)
     {
@@ -323,6 +348,7 @@ class CampaignEntity
         $this->measurementSpec = $data['measurement_spec'];
         $this->buyModel = $data['buy_model'];
         $this->deliveryStatus = $data['delivery_status'];
+        $this->appId = 0;
         $this->dailyBudget = isset($data['daily_budget_micro']) ? $data['daily_budget_micro'] / 1000000 : 0.0;
         $this->lifetimeBudget = isset($data['lifetime_spend_cap_micro']) ? $data['lifetime_spend_cap_micro'] / 1000000 : 0.0;
         $this->raw = $data;

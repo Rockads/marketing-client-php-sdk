@@ -65,6 +65,11 @@ class AdEntity
     private $campaignId;
 
     /**
+     * @var int
+     */
+    private $appId;
+
+    /**
      * @var ?array
      */
     private $reviewStatusReasons;
@@ -324,6 +329,24 @@ class AdEntity
         return $this;
     }
 
+    /**
+     * @return int
+     */
+    public function getAppId()
+    {
+        return $this->appId;
+    }
+
+    /**
+     * @param int $appId
+     * @return AdEntity
+     */
+    public function setAppId($appId): AdEntity
+    {
+        $this->appId = $appId;
+        return $this;
+    }
+
 
     public function load($data)
     {
@@ -341,6 +364,7 @@ class AdEntity
         $this->campaignId = $data['campaignId'] ?? null;
         $this->reviewStatusReasons = $data['review_status_reasons'];
         $this->deliveryStatus = $data['delivery_status'];
+        $this->appId = 0;
         $this->raw = $data;
 
         return $this;
