@@ -47,7 +47,7 @@ while (true) {
         }
     } catch (\Rockads\Connect\Exception\TokenExpireException $exception) {
 
-        echo 'Refreh Token' . PHP_EOL;
+        echo 'Refresh Token' . PHP_EOL;
 
         $credentials = $client->refreshToken();
 
